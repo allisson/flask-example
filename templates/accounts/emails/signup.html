@@ -1,0 +1,21 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site_name }} Confirm Signup</title>
+</head>
+<body>
+<p>
+  Hello,
+</p>
+<p>
+  Click on the link below to confirm your email for a new account at {{ site_name }}.
+</p>
+<p>
+  <a href="{{ site_url }}{{ url_for('accounts_app.signup_confirm', token=signed_data) }}">Confirm Signup</a>
+</p>
+<p>
+  Thanks,<br />
+  {{ site_name }}
+</p>
+</body>
+</html>

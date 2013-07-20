@@ -1,0 +1,17 @@
+{% macro render_pagination(pagination) %}
+  <div class="pagination pagination-large">
+    <ul>
+  {%- for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <li><a href="{{ request.base_url }}?page={{ page }}">{{ page }}</a></li>
+      {% else %}
+        <li class="active"><a href="#">{{ page }}</a></li>
+      {% endif %}
+    {% else %}
+      <li class="disabled"><span class=ellipsis>…</span></li>
+    {% endif %}
+  {%- endfor %}
+    </ul>
+  </div>
+{% endmacro %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Signup{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <h3>Confirm Signup</h3>
+</div>
+
+<form action="{{ url_for('accounts_app.signup_confirm', token=token) }}" method="post" class="form-horizontal">
+  {{ form.hidden_tag() }}
+  {% import 'form_macro.html' as form_macro %}
+  {{ form_macro.form_field(form.name, with_label=True) }}
+  {{ form_macro.form_field(form.username, with_label=True) }}
+  {{ form_macro.form_field(form.password, with_label=True) }}
+  {{ form_macro.form_field(form.password_confirm, with_label=True) }}
+  <div class="form-actions">
+    <button type="submit" class="btn btn-icon btn-primary">Send</button>
+  </div>
+</form>
+
+{% endblock %}

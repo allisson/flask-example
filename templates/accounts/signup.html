@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <h3>Signup</h3>
+</div>
+
+<form action="{{ url_for('accounts_app.signup') }}" method="post" class="form-horizontal">
+  {{ form.hidden_tag() }}
+  {% import 'form_macro.html' as form_macro %}
+  {{ form_macro.form_field(form.email, with_label=True) }}
+  <div class="form-actions">
+    <button type="submit" class="btn btn-icon btn-primary">Send</button>
+  </div>
+</form>
+
+{% endblock %}

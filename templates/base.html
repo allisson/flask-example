@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %} - Flask Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{% block head_description %}{% endblock %}">
+  <meta name="author" content="{% block head_author %}{% endblock %}">
+
+  <!-- Le styles -->
+  <link href="{{ url_for('static', filename='bootstrap/css/cerulean.css') }}" rel="stylesheet">
+  <style>
+  body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+  }
+  </style>
+  <link href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="{{ url_for('static', filename='bootstrap/js/html5shiv.js') }}"></script>
+  <![endif]-->
+  {% block extrahead %}{% endblock %}
+</head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <!-- Be sure to leave the brand out there if you want it shown -->
+          <a class="brand" href="/">Flask Example</a>
+
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <!-- .nav, .navbar-search, .navbar-form, etc -->
+            {% if g.user %}
+            
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  {{ g.user.username }}
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ url_for('accounts_app.logout') }}">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            
+            {% else %}
+            
+            <ul class="nav pull-right">
+              <li>
+                <a href="{{ url_for('accounts_app.login') }}">
+                  Login
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('accounts_app.signup') }}">
+                  Signup
+                </a>
+              </li>
+            </ul>
+            
+            {% endif %}
+          
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      <div id="messages">                                                       
+        {% for category, message in messages %}                                           
+        <div class="alert alert-{{ category }}">                            
+          <a class="close" data-dismiss="alert">&times;</a>                     
+          <strong>{{ message }}</strong>                                        
+        </div>                                                                  
+        {% endfor %}                                                            
+      </div>
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='js/jquery-1.10.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    {% block extrajs %}{% endblock %}
+  </body>
+</html>
