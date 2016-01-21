@@ -59,8 +59,8 @@ class User(BaseDocument):
         return self.username
 
     def __init__(self, *args, **kwargs):
-        super(User, self).__init__(*args, **kwargs)
         password = kwargs.pop('password', None)
+        super(User, self).__init__(*args, **kwargs)
         if password:
             self.set_password(password)
 

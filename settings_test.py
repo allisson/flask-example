@@ -5,7 +5,7 @@ from settings import *
 TESTING = True
 
 # flask wtf settings
-CSRF_ENABLED = False
+WTF_CSRF_ENABLED = False
 
 # flask mongoengine settings
 MONGODB_SETTINGS = {
